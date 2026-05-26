@@ -1,46 +1,91 @@
 # Aprendendo-Go
 
-🛠️ Desafio de Aquecimento (Nível: Fácil)
-Para fixar e já avançar um pouco na lógica, quero que você modifique ou crie um novo programa que resolva o seguinte:
+Documentação do Projeto: Calculadora
+Simples em Go
+Versão: 1.0
+Linguagem: Go (Golang)
+Autor: Desenvolvedor Go
 
-O Problema: Crie um programa que classifique a temperatura de um banho de acordo com o valor em Celsius:
+1. Visão Geral do Sistema
+Este projeto consiste em uma calculadora baseada em console (CLI) desenvolvida em Go. O
+sistema roda em um loop contínuo, permitindo que o usuário selecione operações matemáticas
+básicas (Adição, Subtração, Multiplicação e Divisão), insira dois números decimais, veja o
+resultado formatado e continue utilizando o programa até que decida sair explicitamente.
+O projeto está estruturado de forma modular, separando a lógica de exibição de menus/captura
+de dados da lógica de controle principal e das operações matemáticas.
 
-Se a temperatura for menor que 15°C, exiba: "Água muito fria!".
+2. Fluxo de Execução
+O ciclo de vida do programa segue os seguintes passos dentro de um laço de repetição:
+1. O menu principal é renderizado na tela.
+2. O sistema aguarda a entrada do usuário para definir a operação desejada e os dois
+valores numéricos.
+3. A opção digitada é avaliada por uma estrutura de decisão.
+4. A função matemática correspondente é invocada e o resultado é exibido de forma
+formatada.
+5. O ciclo recomeça, a menos que a opção de saída (5) tenha sido acionada.
 
-Se estiver entre 15°C e 30°C, exiba: "Água morna/agradável".
+3. Explicação das Funções
+Função / Assinatura Descrição Técnico-Funcional
+func Menu() (int, float64, float64) Responsável por desenhar a interface gráfica
+textual no console. Ela utiliza ponteiros
+através do pacote fmt.Scan para capturar três
+valores digitados pelo usuário (opção,
+número A, número B) e os retorna
+simultaneamente usando o recurso de
 
-Se for maior que 30°C, exiba: "Água quente!".
+Função / Assinatura Descrição Técnico-Funcional
+múltiplos retornos do Go.
 
-Requisitos:
+func main() Ponto de entrada (entrypoint) do executável.
+Contém o laço de repetição infinito que
+gerencia o estado da calculadora e a
+estrutura de decisão switch para direcionar o
+fluxo baseado na escolha do usuário.
+func Adicao(a, b float64) float64 Recebe dois parâmetros decimais e retorna a
 
-Use uma variável para a temperatura.
+soma aritmética entre eles.
 
-Use estruturas if / else if / else.
+func Subtracao(a, b float64) float64 Recebe dois parâmetros decimais e retorna a
 
-Tente usar o operador fmt.Scan() para que o usuário digite a temperatura no terminal.
+diferença aritmética (a - b).
 
-🔄 Desafio 2 (Nível: Médio) - Entrando nos Loops
-Agora que a leitura de dados funciona, imagine que é chato ter que rodar o programa toda vez que quisermos testar uma nova temperatura. Seria legal se o programa ficasse pedindo temperaturas continuamente.
+func Multiplicacao(a, b float64) float64 Recebe dois parâmetros decimais e retorna o
 
-Em Go, só existe um tipo de laço de repetição: o for. Não temos while ou do while. O for do Go é poderoso e faz o trabalho de todos eles.
+produto da multiplicação (a * b).
 
-Seu novo desafio:
-Coloque a lógica do seu código (o Print, o Scan e os if/else) dentro de um laço for infinito.
-Mas atenção: o programa precisa ter uma forma de parar! Se o usuário digitar um valor impossível para a água, digamos -100, o programa deve exibir "Saindo..." e encerrar.
+func Divisao(a, b float64) float64 Recebe dois parâmetros decimais e retorna o
+quociente da divisão (a / b). Nota de boa
+prática: deve conter uma validação para
+evitar divisões por zero.
 
-Dica: Para criar um loop infinito em Go, você pode apenas escrever for { ... }. Para "quebrar" o loop e sair dele, usamos a palavra-chave break.
+4. Dicionário de Palavras-Chave e Conceitos Go
+Abaixo estão explicados os termos nativos e pacotes utilizados na arquitetura desta
+calculadora:
+● package main: Define que este arquivo específico gera um arquivo executável binário
+após a compilação, e não apenas uma biblioteca compartilhada.
+● import "fmt": Importa o pacote nativo de formatação (Format). Ele provê funções de
+entrada e saída de dados, essenciais para interagir com o terminal.
+● func: Palavra-chave utilizada para declarar uma nova função ou método no Go.
+● int e float64: Tipos de dados nativos. int representa números inteiros (ex: 1, 5, -10).
+float64 representa números reais/decimais com precisão de 64 bits (ex: 3.14, 2.0, -0.5).
+● := (Operador de Curta Declaração): Cria e inicializa variáveis em uma única instrução,
+permitindo que o Go infira o tipo do dado automaticamente sem a necessidade de usar
+explicitamente a palavra var.
+● for { ... }: Cria um laço de repetição (loop) infinito. Em Go, não existe a palavra-chave
+while; o for sem condições cumpre esse papel de rodar o bloco continuamente.
+● switch / case: Estrutura de controle condicional limpa. Avalia uma variável contra
+múltiplos cenários (cases). No Go, o switch possui um "break implícito", o que significa
+que ele executa apenas o caso correspondente e sai da estrutura automaticamente.
+● default: A cláusula de escape do switch. É executada caso o valor avaliado não coincida
+com nenhum dos case listados (no projeto, serve para tratar opções inválidas).
+● return: Finaliza a execução da função atual e devolve os valores especificados para
 
-🛠️ Desafio 3 (Nível: Fácil/Médio) - Refatorando para Funções
-Vamos melhorar o nosso código do termômetro organizando ele com funções!
+quem a chamou. Quando usado dentro da função main(), encerra o programa por
+completo.
+● fmt.Scan(&variavel): Lê o que o usuário digitou no console. O caractere comercial (&)
+indica um ponteiro, informando ao Go o endereço de memória exato onde o valor
+capturado deve ser salvo.
+● fmt.Printf(): Imprime texto formatado na tela. Permite o uso de marcadores como %.2f
+(exibir número decimal com apenas duas casas após o ponto) e \n (pular linha no
+console).
 
-Sua missão:
-
-Crie uma função nova (fora da main) chamada avaliarTemperatura.
-
-Essa função deve receber a temperatura (float64) como parâmetro.
-
-Coloque toda aquela lógica de if / else if / else dentro dessa função.
-
-A função deve retornar uma string (o texto "A temperatura está fria", etc.).
-
-Dentro da sua main, você vai continuar lendo a temperatura no seu loop for, mas vai chamar a sua nova função e imprimir o resultado que ela devolver.

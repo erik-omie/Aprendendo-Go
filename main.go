@@ -1,35 +1,41 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/erik-omie/Aprendendo-Go/model"
+)
 
 func main() {
 
-	var celsius float64
-
 	for {
 
-		fmt.Print("Informe a temperatura da água em Celsius: ") // Solicita ao usuário que insira a temperatura da água em Celsius
-		fmt.Scan(&celsius)                                      // Lê a temperatura inserida pelo usuário e armazena na variável celsius
+		opcao, a, b := model.Menu()
 
-		// Condição para verificar se a temperatura é válida
-		if celsius == 0 {
-			fmt.Println("A temperatura da água não pode ser zero.")
-			break
+		switch opcao {
+		case 1:
+			resultado := model.Adicao(a, b)
+			fmt.Printf("Resultado: %.2f\n", resultado)
+
+		case 2:
+			resultado := model.Subtracao(a, b)
+			fmt.Printf("Resultado: %.2f\n", resultado)
+
+		case 3:
+			resultado := model.Multiplicacao(a, b)
+			fmt.Printf("Resultado: %.2f\n", resultado)
+
+		case 4:
+			resultado := model.Divisao(a, b)
+			fmt.Printf("Resultado: %.2f\n", resultado)
+
+		case 5:
+			println("Saindo da calculadora...")
+			return
+
+		default:
+			println("Opção inválida!")
 		}
 
-		menssagem := avaliarTemperatura(celsius)
-		fmt.Println(menssagem) // Imprime a mensagem de avaliação da temperatura da água
-	}
-
-}
-
-func avaliarTemperatura(celsius float64) string {
-
-	if celsius < 15 {
-		return "A temperatura da água está fria."
-	} else if celsius >= 15 && celsius <= 30 {
-		return "A temperatura da água está agradevel!"
-	} else {
-		return "A temperatura da água está quente!"
 	}
 }
